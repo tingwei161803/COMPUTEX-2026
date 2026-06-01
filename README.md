@@ -10,9 +10,9 @@
 
 | | |
 |---|---|
-| 🌐 網站 | <https://tingwei161803.github.io/COMPUTEX2026/> |
+| 🌐 網站 | <https://tingwei161803.github.io/COMPUTEX-2026/> |
 
-> 直接點進去就能用,無需安裝。可用 `https://tingwei161803.github.io/COMPUTEX2026/#<slug>` 深連結到特定主軸卡片(例:`#ai-computing`、`#robotics-mobility`、`#next-gen-tech`)。
+> 直接點進去就能用,無需安裝。可用 `https://tingwei161803.github.io/COMPUTEX-2026/#<slug>` 深連結到特定主軸卡片(例:`#ai-computing`、`#robotics-mobility`、`#next-gen-tech`)。
 
 ---
 
@@ -34,7 +34,7 @@
 本站內容整理自 **COMPUTEX 官方網站與公開報導**。
 
 ```
-COMPUTEX2026/
+COMPUTEX-2026/
 ├── index.html          # 入口頁(meta / OG / JSON-LD)
 ├── assets/
 │   ├── styles.css       # 設計 token(淺/深)+ 全部元件樣式
@@ -62,8 +62,8 @@ COMPUTEX2026/
 
 ```bash
 # 1. clone 專案
-git clone git@github.com:tingwei161803/COMPUTEX2026.git
-cd COMPUTEX2026
+git clone git@github.com:tingwei161803/COMPUTEX-2026.git
+cd COMPUTEX-2026
 
 # 2a. 最簡單:直接開啟 index.html
 open index.html
