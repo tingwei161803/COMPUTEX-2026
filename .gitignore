@@ -1,0 +1,5 @@
+# 爬蟲中間產物(可由 _tools/scrape.py 重新產生);data/*.js 才是 committed 成品
+_tools/raw/
+*.log
+.DS_Store
+.playwright-mcp/

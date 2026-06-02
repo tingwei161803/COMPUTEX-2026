@@ -1,0 +1,127 @@
+{
+  "_doc": "Medical-AI taxonomy for COMPUTEX/InnoVEX 2026. `gate` = strong terms that qualify a company as medical-relevant at all. `categories` = 10 sub-domains; each row's `kw` decides sub-category membership (matched only within the gated subset).",
+  "gate": [
+    "medical", "medicine", "clinical", "clinic", "hospital", "patient", "healthcare",
+    "health care", "diagnos", "therapeut", "therapy", "biotech", "biomed", "pharma",
+    "physician", "doctor", "nursing", "surgery", "surgical", "radiolog", "patholog",
+    "telemedicine", "telehealth", "rehabilitation", "wellness", "life science",
+    "醫療", "醫學", "醫院", "臨床", "病患", "病人", "健康", "診斷", "診療", "治療",
+    "生技", "生醫", "製藥", "藥物", "照護", "長照", "復健", "手術", "病歷", "醫材"
+  ],
+  "categories": [
+    {
+      "id": "medical-imaging",
+      "icon": "🩻",
+      "name": { "zh": "醫療影像 AI", "en": "Medical Imaging AI" },
+      "desc": {
+        "zh": "放射、病理、內視鏡、超音波、眼底等醫學影像的 AI 判讀、標註與輔助診斷。",
+        "en": "AI reading, annotation and assisted diagnosis for radiology, pathology, endoscopy, ultrasound and retinal imaging."
+      },
+      "kw": ["imaging", "image", "radiolog", "mri", "ct scan", "x-ray", "xray", "ultrasound",
+             "endoscop", "patholog", "dicom", "pacs", "mammograph", "retina", "fundus",
+             "影像", "放射", "病理", "內視鏡", "超音波", "眼底", "判讀", "造影"]
+    },
+    {
+      "id": "voice-speech",
+      "icon": "🎙️",
+      "name": { "zh": "語音 AI", "en": "Voice & Speech AI" },
+      "desc": {
+        "zh": "語音轉錄、語音病歷、智慧聽診、語音助理等聲學訊號的臨床應用。",
+        "en": "Speech transcription, voice EMR, smart auscultation and voice assistants for clinical settings."
+      },
+      "kw": ["voice", "speech", "asr", "transcription", "dictation", "scribe", "auscultation",
+             "acoustic", "語音", "聽診", "口述", "聲學"]
+    },
+    {
+      "id": "clinical-nlp",
+      "icon": "📝",
+      "name": { "zh": "臨床文字 NLP", "en": "Clinical Text & NLP" },
+      "desc": {
+        "zh": "臨床文本理解、報告自動生成、醫療大語言模型與生成式 AI 應用。",
+        "en": "Clinical text understanding, automated report generation, medical LLMs and generative-AI applications."
+      },
+      "kw": ["nlp", "language model", "llm", "generative", "text mining", "report generation",
+             "summari", "chatbot", "自然語言", "文本", "報告生成", "生成式", "大語言模型", "大型語言"]
+    },
+    {
+      "id": "emr-ehr",
+      "icon": "🗂️",
+      "name": { "zh": "電子病歷 EMR/EHR", "en": "EMR / EHR" },
+      "desc": {
+        "zh": "電子病歷系統、結構化資料、FHIR/HL7 互通與病歷資料平台。",
+        "en": "Electronic medical/health record systems, structured data, FHIR/HL7 interoperability and record data platforms."
+      },
+      "kw": ["emr", "ehr", "medical record", "health record", "fhir", "hl7", "interoperab",
+             "病歷", "電子病歷", "健康存摺", "資料互通"]
+    },
+    {
+      "id": "clinical-systems",
+      "icon": "🏥",
+      "name": { "zh": "臨床系統 / CDSS", "en": "Clinical Systems & CDSS" },
+      "desc": {
+        "zh": "醫院資訊系統(HIS)、臨床決策支援、分診、流程與營運最佳化。",
+        "en": "Hospital information systems (HIS), clinical decision support, triage and workflow/operations optimization."
+      },
+      "kw": ["cdss", "decision support", "hospital information", "his ", "workflow", "triage",
+             "scheduling", "operations", "決策支援", "醫院資訊", "分診", "流程", "排程", "臨床系統"]
+    },
+    {
+      "id": "medical-devices",
+      "icon": "🩺",
+      "name": { "zh": "智慧醫材與感測", "en": "Smart Medical Devices" },
+      "desc": {
+        "zh": "智慧醫療器材、穿戴裝置、生理感測、IVD 與 point-of-care 檢測。",
+        "en": "Smart medical devices, wearables, physiological sensing, IVD and point-of-care testing."
+      },
+      "kw": ["device", "wearable", "sensor", "biosensor", "monitor", "ivd", "point-of-care",
+             "ecg", "ekg", "eeg", "ppg", "vital sign", "醫材", "器材", "穿戴", "感測",
+             "監測", "生理訊號", "檢測", "量測"]
+    },
+    {
+      "id": "drug-biotech",
+      "icon": "🧬",
+      "name": { "zh": "藥物與生技", "en": "Drug Discovery & Biotech" },
+      "desc": {
+        "zh": "AI 藥物發現、基因體、蛋白質結構、生物資訊與精準醫療。",
+        "en": "AI drug discovery, genomics, protein structure, bioinformatics and precision medicine."
+      },
+      "kw": ["drug", "biotech", "genom", "protein", "molecul", "omics", "bioinformatic",
+             "precision medicine", "discovery", "藥", "生技", "基因", "蛋白", "製藥",
+             "精準醫療", "生物資訊"]
+    },
+    {
+      "id": "digital-health",
+      "icon": "📲",
+      "name": { "zh": "遠距與健康管理", "en": "Digital Health & Telemedicine" },
+      "desc": {
+        "zh": "遠距醫療、健康監測、慢性病與長照管理、預防醫學與健康促進。",
+        "en": "Telemedicine, health monitoring, chronic-disease and elderly-care management, preventive health."
+      },
+      "kw": ["telemedicine", "telehealth", "remote care", "remote monitoring", "health management",
+             "wellness", "chronic", "elderly", "mhealth", "digital health", "遠距", "健康管理",
+             "照護", "慢性", "長照", "預防", "健康促進"]
+    },
+    {
+      "id": "surgical-robotics",
+      "icon": "🦾",
+      "name": { "zh": "手術與復健機器人", "en": "Surgical & Rehab Robotics" },
+      "desc": {
+        "zh": "手術導航與機器人、復健機器人、外骨骼、智慧義肢與輔具。",
+        "en": "Surgical navigation and robots, rehabilitation robots, exoskeletons, smart prosthetics and assistive devices."
+      },
+      "kw": ["surgical", "surgery", "rehabilitation", "rehab", "exoskeleton", "navigation",
+             "prosthe", "orthotic", "assistive", "手術", "復健", "外骨骼", "導航", "義肢", "輔具"]
+    },
+    {
+      "id": "medical-compute",
+      "icon": "⚙️",
+      "name": { "zh": "醫療 AI 算力與隱私運算", "en": "Medical AI Compute & Privacy" },
+      "desc": {
+        "zh": "醫療 AI 的邊緣運算、推論加速、聯邦學習、隱私保護與資安基礎設施。",
+        "en": "Edge computing, inference acceleration, federated learning, privacy and security infrastructure for medical AI."
+      },
+      "kw": ["edge computing", "federated", "privacy", "inference", "accelerat", "secure compute",
+             "homomorphic", "data security", "邊緣運算", "聯邦學習", "隱私", "推論", "加速", "資安"]
+    }
+  ]
+}
