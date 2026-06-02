@@ -3,3 +3,5 @@ _tools/raw/
 *.log
 .DS_Store
 .playwright-mcp/
+__pycache__/
+*.pyc
