@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>醫療 AI 推薦參觀路線 · Medical AI Routes</title>
+  <meta name="description" content="COMPUTEX × InnoVEX 2026 醫療 AI 推薦參觀路線 · 14 種預設組合,可選次分類、可選 COMPUTEX/InnoVEX/合併,即時產生依場館排序的參觀動線。" />
+  <link rel="canonical" href="https://tingwei161803.github.io/COMPUTEX-2026/routes.html" />
+  <meta name="theme-color" content="#5B6CFF" />
+  <meta property="og:title" content="醫療 AI 推薦參觀路線" />
+  <meta property="og:description" content="14 種預設組合 + 自由 builder,即時產生 COMPUTEX/InnoVEX 醫療 AI 參觀動線。" />
+  <meta property="og:url" content="https://tingwei161803.github.io/COMPUTEX-2026/routes.html" />
+  <meta property="og:image" content="https://tingwei161803.github.io/COMPUTEX-2026/assets/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300,0,0&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="appbar">
+    <div class="appbar__inner">
+      <a class="brand" href="index.html">
+        <span class="material-symbols-rounded brand__logo">hub</span>
+        <span class="brand__name">COMPUTEX 2026</span>
+      </a>
+      <div class="appbar__actions">
+        <button class="icon-btn" id="langToggle" type="button" title="Language" aria-label="Toggle language / 切換語言">
+          <span class="material-symbols-rounded">translate</span>
+          <span class="icon-btn__txt" id="langLabel">中</span>
+        </button>
+        <button class="icon-btn" id="themeToggle" type="button" title="Theme" aria-label="Toggle theme / 切換主題">
+          <span class="material-symbols-rounded" id="themeIcon">dark_mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="siterail" id="siteRail" aria-label="Site navigation"></nav>
+
+  <main class="page">
+    <div class="page-head" data-item>
+      <span class="eyebrow"><span class="material-symbols-rounded">route</span>
+        <span class="i18n-zh">醫療 AI · 推薦路線</span><span class="i18n-en">Medical AI · Routes</span></span>
+      <h1><span class="i18n-zh">醫療 AI 推薦參觀路線</span><span class="i18n-en">Medical-AI Visiting Routes</span></h1>
+      <p class="lead">
+        <span class="i18n-zh">挑一條預設路線,或自由組合「焦點(COMPUTEX / InnoVEX / 兩展)× 次分類」,即時產生依場館排序、可走的參觀動線。</span>
+        <span class="i18n-en">Pick a preset route, or freely combine focus (COMPUTEX / InnoVEX / both) × sub-categories to generate a venue-ordered, walkable itinerary.</span>
+      </p>
+    </div>
+
+    <h2 class="route-h"><span class="i18n-zh">預設路線</span><span class="i18n-en">Preset routes</span></h2>
+    <div class="route-presets" id="presets"></div>
+
+    <div class="builder">
+      <span class="builder__label"><span class="i18n-zh">① 焦點</span><span class="i18n-en">① Focus</span></span>
+      <div class="seg" id="focusSeg"></div>
+      <span class="builder__label"><span class="i18n-zh">② 次分類(可複選;不選=全部)</span><span class="i18n-en">② Sub-categories (multi-select; none = all)</span></span>
+      <div class="catbar" id="subChips"></div>
+    </div>
+
+    <div class="route-summary" id="routeSummary"></div>
+    <div id="routeList"></div>
+  </main>
+
+  <dialog class="dialog" id="dialog" aria-labelledby="dialogTitle">
+    <div class="dialog__bar">
+      <span class="dialog__spacer"></span>
+      <button class="icon-btn" id="dialogClose" type="button" aria-label="Close / 關閉">
+        <span class="material-symbols-rounded">close</span>
+      </button>
+    </div>
+    <div class="dialog__body" id="dialogBody"></div>
+  </dialog>
+
+  <footer class="footer">
+    <p>
+      <span class="i18n-zh">路線由本站依醫療 AI 整理結果即時生成,僅供規劃參考 · 攤位與動線以現場與官方公告為準。</span>
+      <span class="i18n-en">Routes are generated live from this site's medical-AI dataset, for planning reference only · Verify booths on-site and with official sources.</span>
+    </p>
+  </footer>
+
+  <script src="data/medical.js"></script>
+  <script src="data/routes.js"></script>
+  <script src="assets/core.js"></script>
+  <script src="assets/site-nav.js"></script>
+  <script src="assets/routes.js"></script>
+  <script>
+    Core.init();
+    Routes.init();
+  </script>
+</body>
+</html>

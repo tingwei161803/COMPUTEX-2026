@@ -13,12 +13,12 @@
 
   var NAV = [
     { href: "index.html",              icon: "hub",              built: true,  zh: "COMPUTEX 介紹", en: "COMPUTEX" },
-    { href: "innovex.html",            icon: "rocket_launch",    built: false, zh: "InnoVEX 介紹",  en: "InnoVEX" },
+    { href: "innovex.html",            icon: "rocket_launch",    built: true,  zh: "InnoVEX 介紹",  en: "InnoVEX" },
     { href: "exhibitors-computex.html", icon: "storefront",      built: true,  zh: "COMPUTEX 廠商", en: "COMPUTEX Exhibitors" },
     { href: "exhibitors-innovex.html",  icon: "storefront",      built: true,  zh: "InnoVEX 廠商",  en: "InnoVEX Exhibitors" },
     { href: "medical-computex.html",   icon: "medical_services", built: true,  zh: "COMPUTEX 醫療 AI", en: "COMPUTEX Medical AI" },
     { href: "medical-innovex.html",    icon: "medical_services", built: true,  zh: "InnoVEX 醫療 AI",  en: "InnoVEX Medical AI" },
-    { href: "routes.html",             icon: "route",            built: false, zh: "醫療 AI 路線",     en: "Medical AI Routes" }
+    { href: "routes.html",             icon: "route",            built: true,  zh: "醫療 AI 路線",     en: "Medical AI Routes" }
   ];
 
   function currentFile() {
