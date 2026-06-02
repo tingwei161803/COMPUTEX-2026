@@ -1099,3 +1099,90 @@ html[lang="en"] .i18n-zh { display: none; }
   .filter-count { margin-left: 0; width: 100%; order: 9; }
   .fsel select { max-width: 42vw; }
 }
+
+/* =========================================================================
+   MEDICAL-AI DEEP PAGES — category pills, profile sections (Phase 3)
+   ========================================================================= */
+.catbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 18px;
+}
+.catpill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: inherit;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+  background: var(--surface-container);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  box-shadow: var(--elev-1);
+  transition: transform .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+}
+.catpill:hover { transform: translateY(-2px); color: var(--on-surface); }
+.catpill .material-symbols-rounded { font-size: 18px; }
+.catpill__ico { font-size: 1rem; line-height: 1; }
+.catpill__n {
+  font-size: .72rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--shell-bg);
+  color: var(--on-surface-variant);
+}
+.catpill.is-active {
+  background: linear-gradient(135deg, var(--primary), var(--tertiary));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 8px 20px -8px var(--primary);
+}
+.catpill.is-active .catpill__n { background: rgba(255,255,255,.25); color: #fff; }
+
+/* medical card highlight + sub-category tags */
+.med-card__hl {
+  margin: 0;
+  font-size: .82rem;
+  line-height: 1.45;
+  color: var(--on-surface-variant);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.subcat-tag {
+  font-size: .68rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.subcat-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+
+/* multi-faceted profile in dialog */
+.prof { display: flex; flex-direction: column; gap: 16px; margin-bottom: 20px; }
+.prof-sect__h {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+.prof-sect__h .material-symbols-rounded { font-size: 18px; }
+.prof-sect p { margin: 0; font-size: .98rem; line-height: 1.7; color: var(--on-surface); }
