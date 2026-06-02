@@ -2,7 +2,7 @@
 
 > 把 COMPUTEX 2026 與 InnoVEX 2026 的官方內容,整理成一個多頁、可互動、雙語的靜態導覽站 —— 從活動介紹、**全參展商名錄**,到**醫療 AI 廠商深度頁**與**推薦參觀路線**。
 
-這個站把 [COMPUTEX 2026](https://www.computextaipei.com.tw/) 與 [InnoVEX 2026](https://innovex.computex.biz/) 的主題、參展商、醫療 AI 生態與參觀規劃整理成 7 個彼此串連的頁面。資料整理自官方網站與公開報導,純 HTML/CSS/JS、零 build,可直接部署到 GitHub Pages。
+這個站把 [COMPUTEX 2026](https://www.computextaipei.com.tw/) 與 [InnoVEX 2026](https://innovex.computex.biz/) 的主題、參展商、醫療 AI 生態、參觀規劃與**新聞風向**整理成 8 個彼此串連的頁面。資料整理自官方網站與公開報導,純 HTML/CSS/JS、零 build,可直接部署到 GitHub Pages。
 
 ---
 
@@ -21,6 +21,7 @@
 | 頁面 | 檔案 | 內容 |
 |------|------|------|
 | COMPUTEX 介紹 | `index.html` | 主題、三大主軸、週程、規模、參觀、背景(composite 一頁式) |
+| 新聞風向 | `news.html` | 黃仁勳 keynote 重點與金句、市場風向、預測、**黃仁勳概念股**、輿情分析(整理自公開報導,非投資建議) |
 | InnoVEX 介紹 | `innovex.html` | InnoVEX 新創展介紹、產業分布、週程、看點 |
 | COMPUTEX 廠商 | `exhibitors-computex.html` | **全 1,473 家**參展商,可依國家 / 展區 / 館別篩選 + 搜尋 |
 | InnoVEX 廠商 | `exhibitors-innovex.html` | **全 383 家**新創,可依產業 / 類型 / 國家 / 館別篩選 + 搜尋 |
@@ -50,7 +51,7 @@
 
 ```
 COMPUTEX-2026/
-├── index.html / innovex.html                # 介紹頁(composite,app.js 渲染)
+├── index.html / innovex.html / news.html    # 介紹/新聞頁(composite,app.js 渲染)
 ├── exhibitors-computex.html / -innovex.html # 全廠商名錄(directory.js)
 ├── medical-computex.html / -innovex.html    # 醫療 AI 深度頁(medical.js)
 ├── routes.html                              # 醫療 AI 路線(routes.js)
@@ -64,14 +65,14 @@ COMPUTEX-2026/
 │   ├── routes.js       # 路線(預設 + builder + 動線生成)
 │   └── og-image.png
 ├── data/
-│   ├── data.js / innovex.js                 # 介紹頁區段資料
+│   ├── data.js / innovex.js / news.js       # 介紹/新聞頁區段資料
 │   ├── exhibitors-computex.js / -innovex.js # 全廠商名錄 + 篩選 facet
 │   ├── medical.js                           # 醫療 taxonomy + 廠商 + 多面向介紹
 │   └── routes.js                            # 推薦路線預設
 ├── _tools/             # 資料管線(可重新產生 data/*.js;raw/ 為 gitignore 的中間檔)
 │   ├── scrape.py            # 抓取 COMPUTEX/InnoVEX 全廠商
 │   ├── candidates.py / build_llm_input.py / fetch_inx_details.py
-│   ├── build_data.py / build_medical.py     # 轉成 data/*.js
+│   ├── build_data.py / build_medical.py / build_news.py  # 轉成 data/*.js
 │   └── taxonomy.json        # 醫療 AI 10 類次分類定義
 ├── .nojekyll
 └── README.md

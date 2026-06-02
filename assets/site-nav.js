@@ -13,6 +13,7 @@
 
   var NAV = [
     { href: "index.html",              icon: "hub",              built: true,  zh: "COMPUTEX 介紹", en: "COMPUTEX" },
+    { href: "news.html",               icon: "insights",         built: true,  zh: "新聞風向",       en: "Market Pulse" },
     { href: "innovex.html",            icon: "rocket_launch",    built: true,  zh: "InnoVEX 介紹",  en: "InnoVEX" },
     { href: "exhibitors-computex.html", icon: "storefront",      built: true,  zh: "COMPUTEX 廠商", en: "COMPUTEX Exhibitors" },
     { href: "exhibitors-innovex.html",  icon: "storefront",      built: true,  zh: "InnoVEX 廠商",  en: "InnoVEX Exhibitors" },
