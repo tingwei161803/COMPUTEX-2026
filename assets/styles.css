@@ -1330,8 +1330,13 @@ html[lang="en"] .i18n-zh { display: none; }
 }
 .route-stop__tags { display: flex; flex-wrap: wrap; gap: 5px; }
 .route-stop__venue {
-  flex: 0 0 auto; max-width: 30%; font-size: .76rem; font-weight: 600; text-align: right;
-  color: var(--primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  flex: 0 0 auto; max-width: 38%; font-size: .76rem; font-weight: 600; text-align: right;
+  color: var(--primary); display: flex; flex-direction: column; align-items: flex-end; gap: 2px; min-width: 0;
+}
+.route-stop__hall { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+.route-stop__booth {
+  font-variant-numeric: tabular-nums; font-weight: 700; font-size: .72rem;
+  color: var(--on-surface-variant);
 }
 @media (max-width: 600px) {
   .route-presets { grid-template-columns: 1fr; }

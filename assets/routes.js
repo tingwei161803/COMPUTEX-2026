@@ -116,7 +116,16 @@ window.Routes = (function () {
     return arr;
   }
 
-  function venueOf(it) {
+  // 排序用:同館 -> 同樓 -> 同攤位區相鄰,實際動線才順
+  function venueSortKey(it) {
+    var V = Core.venue(it);
+    if (!V) return "~";   // 無位置者排最後
+    return (V.code || "") + "|" + (V.floor || "") + "|" + (it.b || "");
+  }
+  // 顯示用:短館名 + 樓層(無實體展館時退回展區/主題館)
+  function venueLabel(it) {
+    var V = Core.venue(it);
+    if (V) return t(V.short);
     return it.show === "cpx" ? (it.zone || "—") : (it.pavilion || t({ zh: "InnoVEX 區", en: "InnoVEX" }));
   }
 
@@ -145,7 +154,7 @@ window.Routes = (function () {
     var refs = [];
     var html = groups.map(function (g) {
       var label = g[0], items = g[1];
-      items.sort(function (a, b) { return venueOf(a).localeCompare(venueOf(b)) || a.ne.localeCompare(b.ne); });
+      items.sort(function (a, b) { return venueSortKey(a).localeCompare(venueSortKey(b)) || a.ne.localeCompare(b.ne); });
       var stops = items.map(function (it) {
         var idx = refs.push(it) - 1;
         var tags = it.subcats.map(function (s) {
@@ -159,7 +168,8 @@ window.Routes = (function () {
             (hl ? '<span class="route-stop__hl">' + esc(hl) + "</span>" : "") +
             '<span class="route-stop__tags">' + tags + "</span>" +
           "</span>" +
-          '<span class="route-stop__venue">' + esc(venueOf(it)) + "</span>" +
+          '<span class="route-stop__venue"><span class="route-stop__hall">' + esc(venueLabel(it)) + "</span>" +
+            (it.b ? '<span class="route-stop__booth">' + esc(it.b) + "</span>" : "") + "</span>" +
         "</button>";
       }).join("");
       return '<div class="route-group"><div class="route-group__h">' +
@@ -183,8 +193,15 @@ window.Routes = (function () {
     if (!it) return;
     var p = it.profile || {};
     var tags = it.subcats.map(function (s) { var c = taxById[s]; return c ? '<span class="subcat-tag">' + c.icon + " " + esc(t(c.name)) + "</span>" : ""; }).join("");
-    var venueRow = '<div class="exh-row"><span class="exh-row__k">' + t({ zh: "位置", en: "Where" }) + '</span><span class="exh-row__v">' +
-      (it.show === "cpx" ? "COMPUTEX · " : "InnoVEX · ") + esc(venueOf(it)) + "</span></div>";
+    var V = Core.venue(it);
+    var showName = it.show === "cpx" ? "COMPUTEX" : "InnoVEX";
+    var vtxt = V ? esc(t(V.full)) + (it.b ? " · " + t({ zh: "攤位 ", en: "Booth " }) + esc(it.b) : "")
+                 : esc(venueLabel(it));
+    var fp = Core.floorplan(it.show);
+    var plan = fp ? ' <a class="med-loc__plan" href="' + esc(fp) + '" target="_blank" rel="noopener">' +
+      t({ zh: "平面圖", en: "Floor plan" }) + '<span class="material-symbols-rounded">open_in_new</span></a>' : "";
+    var venueRow = '<div class="exh-row"><span class="exh-row__k">' + t({ zh: "位置", en: "Where" }) +
+      '</span><span class="exh-row__v">' + showName + " · " + vtxt + plan + "</span></div>";
     els.dbody.innerHTML =
       '<div class="exh-dlg__head"><span class="exh-dlg__logo' + (it.logo ? "" : " is-empty") + '">' + logo(it.ne, it.logo) + "</span>" +
         '<div><h2 id="dialogTitle" class="exh-dlg__title">' + esc(t({ zh: it.nz, en: it.ne })) + "</h2>" +
