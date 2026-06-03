@@ -17,6 +17,37 @@ window.Medical = (function () {
     IT:{zh:"義大利",en:"Italy"}, NL:{zh:"荷蘭",en:"Netherlands"}, IN:{zh:"印度",en:"India"} };
   function cname(c) { return COUNTRY[c] ? t(COUNTRY[c]) : (c || ""); }
 
+  // 實體展館代碼 -> 雙語名稱(短名給卡片、全名給詳情)
+  var VENUE = {
+    T1:   { zh: "南港展覽館 1 館", en: "TaiNEX Hall 1",     sz: "南港 1 館", se: "Hall 1" },
+    T2:   { zh: "南港展覽館 2 館", en: "TaiNEX Hall 2",     sz: "南港 2 館", se: "Hall 2" },
+    TWTC: { zh: "台北世貿中心 1 館", en: "Taipei WTC Hall 1", sz: "世貿 1 館", se: "TWTC" }
+  };
+  // 各展官方會場平面圖
+  var FLOORPLAN = {
+    cpx: "https://booth.e-taitra.com.tw/map/v2/zh-TW/2026CP/h/19?cad=0",
+    inx: "https://innovex.computex.biz/show/floorplan.aspx"
+  };
+  // 卡片位置小標:📍 短館名 · 攤位
+  function venueChip(it) {
+    var V = VENUE[it.v];
+    if (!V) return "";
+    var booth = it.b ? '<span class="med-loc__booth">' + esc(it.b) + "</span>" : "";
+    return '<div class="med-card__loc"><span class="material-symbols-rounded">location_on</span>' +
+      "<span>" + esc(t({ zh: V.sz, en: V.se })) + "</span>" + booth + "</div>";
+  }
+  // 詳情展館列:全名 · 攤位 + 會場平面圖連結
+  function venueRowHtml(it) {
+    var V = VENUE[it.v];
+    if (!V) return "";
+    var txt = esc(t({ zh: V.zh, en: V.en }));
+    if (it.b) txt += " · " + t({ zh: "攤位 ", en: "Booth " }) + esc(it.b);
+    var fp = FLOORPLAN[kind];
+    var plan = fp ? ' <a class="med-loc__plan" href="' + esc(fp) + '" target="_blank" rel="noopener">' +
+      t({ zh: "平面圖", en: "Floor plan" }) + '<span class="material-symbols-rounded">open_in_new</span></a>' : "";
+    return txt + plan;
+  }
+
   window.__logoFail = window.__logoFail || function (img, init) {
     var b = img.parentNode; b.classList.add("is-empty"); b.innerHTML = '<span class="ph">' + esc(init) + "</span>";
   };
@@ -114,6 +145,7 @@ window.Medical = (function () {
       return '<button class="exh-card med-card" data-item data-i="' + i + '" type="button">' +
         '<span class="exh-card__logo' + (it.logo ? "" : " is-empty") + '">' + logo(it.ne, it.logo) + "</span>" +
         '<h3 class="exh-card__name">' + esc(t({ zh: it.nz, en: it.ne })) + "</h3>" +
+        venueChip(it) +
         (hl ? '<p class="med-card__hl">' + esc(hl) + "</p>" : "") +
         '<div class="exh-card__meta">' + subTags(it) + "</div>" +
       "</button>";
@@ -138,6 +170,8 @@ window.Medical = (function () {
     if (!it) return;
     var p = it.profile || {};
     var meta = row(t({ zh: "國家", en: "Country" }), esc(cname(it.c)));
+    var vrow = venueRowHtml(it);
+    if (vrow) meta += row(t({ zh: "展館", en: "Venue" }), vrow);
     if (kind === "cpx") meta += row(t({ zh: "展區", en: "Zone" }), esc(it.zone || "—"));
     else meta += row(t({ zh: "產業", en: "Industry" }), esc(it.industry || "—")) +
       row(t({ zh: "類型", en: "Type" }), esc(it.type || "")) +
