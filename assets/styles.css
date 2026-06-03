@@ -10,6 +10,9 @@
 /* ---- Design tokens : LIGHT (default) ---- */
 :root,
 [data-theme="light"] {
+  /* stock sparkline semantic colours (台股慣例：漲紅、跌綠) */
+  --stock-up:   #e0392f;
+  --stock-down: #16a34a;
   --primary:             #5B6CFF;
   --primary-strong:      #4250E6;
   --on-primary:          #FFFFFF;
@@ -64,6 +67,9 @@
 
 /* ---- Design tokens : DARK (near-OLED) ---- */
 [data-theme="dark"] {
+  /* stock sparkline semantic colours — brighter for OLED contrast */
+  --stock-up:   #ff5a4d;
+  --stock-down: #34d27f;
   --primary:             #8E9CFF;
   --primary-strong:      #A9B4FF;
   --on-primary:          #0A0B12;
@@ -1346,4 +1352,103 @@ html[lang="en"] .i18n-zh { display: none; }
 .route-h {
   font-family: var(--font-display); font-size: 1.15rem; font-weight: 700;
   letter-spacing: -.01em; color: var(--on-surface); margin: 22px 0 12px;
+}
+
+/* =========================================================================
+   SPARKLINE — inline SVG stock price chart on concept-stock cards
+   ========================================================================= */
+
+/* wrapper — sits between card__summary and card__tags */
+.sparkline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* no margin-top: card gap (12px) handles spacing */
+}
+
+/* SVG — full width of container, fixed height */
+.sparkline__svg {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 52px;
+  display: block;
+  overflow: visible;
+}
+
+/* polyline — stroke colour driven by direction class */
+.sparkline__line {
+  stroke-width: 1.8px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.is-up   .sparkline__line { stroke: var(--stock-up); }
+.is-down .sparkline__line { stroke: var(--stock-down); }
+
+/* area fill — translucent gradient behind the line */
+.sparkline__area {
+  opacity: .15;
+}
+.is-up   .sparkline__area { fill: var(--stock-up); }
+.is-down .sparkline__area { fill: var(--stock-down); }
+
+/* gradient stops (JS sets id per ticker; CSS colours the stops) */
+.is-up   .spk-stop-0 { stop-color: var(--stock-up); stop-opacity: .55; }
+.is-up   .spk-stop-1 { stop-color: var(--stock-up); stop-opacity: 0; }
+.is-down .spk-stop-0 { stop-color: var(--stock-down); stop-opacity: .55; }
+.is-down .spk-stop-1 { stop-color: var(--stock-down); stop-opacity: 0; }
+
+/* terminal dot at last data point */
+.sparkline__dot {
+  r: 3.5px;
+  stroke-width: 1.5px;
+  vector-effect: non-scaling-stroke;
+}
+.is-up   .sparkline__dot { fill: var(--stock-up);   stroke: var(--surface-container); }
+.is-down .sparkline__dot { fill: var(--stock-down); stroke: var(--surface-container); }
+
+/* pct badge — right side of sparkline container */
+.sparkline__pct {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.sparkline__arrow {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.is-up   .sparkline__arrow { color: var(--stock-up); }
+.is-down .sparkline__arrow { color: var(--stock-down); }
+
+/* pct number — inherits arrow colour via .is-up/.is-down on parent */
+.is-up   .sparkline__pct { color: var(--stock-up); }
+.is-down .sparkline__pct { color: var(--stock-down); }
+
+.sparkline__pct {
+  font-size: .95rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+/* period label — smaller, muted */
+.sparkline__period {
+  font-size: .68rem;
+  font-weight: 500;
+  color: var(--on-surface-variant);
+  letter-spacing: .01em;
+  display: block;
+  text-align: right;
+}
+
+/* mobile: keep SVG from overflowing 375px cards */
+@media (max-width: 480px) {
+  .sparkline { gap: 8px; }
+  .sparkline__svg { height: 44px; }
+  .sparkline__pct { font-size: .85rem; }
 }

@@ -64,6 +64,82 @@
   }
   function r(n) { return Math.round(n * 100) / 100; }
 
+  /* ---------- sparkline: inline SVG for stock price series ---------- */
+  /* Returns an HTML string: SVG polyline + pct badge. Call only when series exists. */
+  function sparkline(slug, series, companyName) {
+    var c   = series.c || [];
+    var pct = series.pct;
+    if (c.length < 2) return "";
+
+    /* geometry */
+    var W = 240, H = 60, padX = 4, padTop = 6, padBot = 6;
+    var plotW = W - padX * 2;
+    var plotH = H - padTop - padBot;
+
+    /* normalize prices to SVG coords */
+    var mn = Math.min.apply(null, c);
+    var mx = Math.max.apply(null, c);
+    var range = mx - mn || 1;                   /* avoid divide-by-zero flat series */
+    var n = c.length;
+    var pts = c.map(function (v, i) {
+      var x = r(padX + (i / (n - 1)) * plotW);
+      var y = r(padTop + (1 - (v - mn) / range) * plotH);
+      return x + "," + y;
+    });
+    var polyPts = pts.join(" ");
+
+    /* last point for the end-circle */
+    var lastX = r(padX + plotW);
+    var lastY = r(padTop + (1 - (c[n - 1] - mn) / range) * plotH);
+
+    /* area fill: close path back along bottom */
+    var firstX = r(padX);
+    var firstY = r(padTop + plotH);
+    var lastBotX = lastX;
+    var areaPts = polyPts + " " + lastBotX + "," + r(padTop + plotH) + " " + firstX + "," + firstY;
+
+    /* direction class (台股慣例：漲紅、跌綠) */
+    var dir = pct >= 0 ? "is-up" : "is-down";
+
+    /* unique gradient id per ticker (avoid collision when multiple sparklines on page) */
+    var gradId = "spk-" + slug.replace(/\./g, "_");
+
+    /* pct label — absolute value, 1-2 decimal places */
+    var absPct = Math.abs(pct);
+    var pctStr = (absPct % 1 === 0 ? absPct.toFixed(1) : absPct.toFixed(2));
+    var arrow  = pct >= 0 ? "▲" : "▼";
+    var periodLabel = escapeHtml(t({ zh: "近一個月", en: "Past month" }));
+
+    /* aria label */
+    var ariaLabel = escapeHtml(companyName) + " " +
+      escapeHtml(t({ zh: "股價走勢", en: "price trend" })) +
+      " " + arrow + pctStr + "% " + periodLabel;
+
+    var svg =
+      '<svg class="sparkline__svg" viewBox="0 0 ' + W + " " + H + '" ' +
+          'preserveAspectRatio="none" role="img" aria-label="' + ariaLabel + '">' +
+        "<defs>" +
+          '<linearGradient id="' + gradId + '" x1="0" y1="0" x2="0" y2="1">' +
+            '<stop class="spk-stop-0" offset="0%"></stop>' +
+            '<stop class="spk-stop-1" offset="100%"></stop>' +
+          "</linearGradient>" +
+        "</defs>" +
+        '<polygon class="sparkline__area" points="' + areaPts + '" ' +
+            'fill="url(#' + gradId + ')"></polygon>' +
+        '<polyline class="sparkline__line" fill="none" points="' + polyPts + '"></polyline>' +
+        '<circle class="sparkline__dot" cx="' + lastX + '" cy="' + lastY + '" r="3.5"></circle>' +
+      "</svg>";
+
+    var badge =
+      '<span class="sparkline__pct" aria-hidden="true">' +
+        '<span class="sparkline__arrow">' + arrow + "</span>" +
+        pctStr + "%" +
+        '<span class="sparkline__period">' + periodLabel + "</span>" +
+      "</span>";
+
+    return '<div class="sparkline ' + dir + '">' + svg + badge + "</div>";
+  }
+
   /* a shared <header class="section-head"> for every section */
   function sectionHead(sec) {
     var sub = t(sec.subtitle)
@@ -99,11 +175,16 @@
         var tags = (item.tags || []).map(function (tg) {
           return '<span class="tag">' + escapeHtml(tg) + "</span>";
         }).join("");
+        var sparkHtml = "";
+        if (window.STOCKS && window.STOCKS.series && window.STOCKS.series[item.slug]) {
+          sparkHtml = sparkline(item.slug, window.STOCKS.series[item.slug], t(item.title));
+        }
         return '<article class="card" tabindex="0" role="button" data-item ' +
             'data-slug="' + escapeHtml(item.slug) + '" ' +
             'aria-label="' + escapeHtml(t(item.title)) + '">' +
           '<h3 class="card__title">' + escapeHtml(t(item.title)) + "</h3>" +
           '<p class="card__summary">' + escapeHtml(t(item.summary)) + "</p>" +
+          sparkHtml +
           (tags ? '<div class="card__tags">' + tags + "</div>" : "") +
         "</article>";
       }).join("");
