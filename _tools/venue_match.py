@@ -20,12 +20,17 @@ import re
 VENUE_FALLBACK = "T2"
 
 
-def load_js_obj(path):
-    """Read a `window.X = <json>;` data file and return the parsed object."""
+def load_js_obj(path, name=None):
+    """Read a `window.X = <json>;` data file and return the parsed object.
+
+    name: which `window.<name> = ...` to read (must be the file's last
+    assignment). Omit when the file has a single assignment.
+    """
     text = open(path, encoding="utf-8").read()
-    m = re.search(r"window\.\w+\s*=\s*", text)
+    pat = r"window\." + (re.escape(name) if name else r"\w+") + r"\s*=\s*"
+    m = re.search(pat, text)
     if not m:
-        raise ValueError(f"no `window.X =` assignment found in {path}")
+        raise ValueError(f"no `window.{name or 'X'} =` assignment found in {path}")
     body = text[m.end():].strip()
     if body.endswith(";"):
         body = body[:-1].rstrip()
