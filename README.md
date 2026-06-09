@@ -10,7 +10,7 @@
 
 | | |
 |---|---|
-| 🌐 網站 | <https://tingwei161803.github.io/COMPUTEX-2026/> |
+| 🌐 網站 | <https://computex-2026.peteraim.com/> |
 
 頂部的**跨頁導覽列**可在 7 頁之間切換;每頁皆支援中文 / English 與深 / 淺色。
 
