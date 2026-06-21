@@ -15,7 +15,7 @@ window.Core = (function () {
   function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
   var state = {
-    lang: lsGet("lang") || "zh",
+    lang: lsGet("lang") || "en",
     theme: lsGet("theme") || "light"
   };
 
