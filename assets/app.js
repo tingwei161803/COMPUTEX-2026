@@ -39,7 +39,7 @@
 
   /* ---------- global state ---------- */
   var state = {
-    lang:  lsGet("lang")  || "zh",       // default language: zh
+    lang:  lsGet("lang")  || "en",       // default language: zh
     theme: lsGet("theme") || "light"
   };
 
