@@ -1,6 +1,6 @@
 /* =========================================================================
    COMPUTEX 2026 · 資料層 (data layer)
-   lazy-data2web · composite — 一頁多區段,app.js 依 type 渲染。
+   composite — 一頁多區段,app.js 依 type 渲染。
 
    資料整理自 COMPUTEX 官方網站與公開報導(見 README 的資料來源)。
    本網站為非官方整理,僅供瀏覽參考;確切資訊以官方公告為準。
