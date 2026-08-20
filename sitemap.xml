@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  本站自己的 sitemap。刻意不寫 <lastmod>:沒有可信的「內容最後修改時間」
+  來源(git commit 時間不等於內容變動時間),給錯的 lastmod 比不給更糟。
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://computex-2026.peteraim.com/exhibitors-computex.html</loc>
+  </url>
+  <url>
+    <loc>https://computex-2026.peteraim.com/exhibitors-innovex.html</loc>
+  </url>
+  <url>
+    <loc>https://computex-2026.peteraim.com/</loc>
+  </url>
+  <url>
+    <loc>https://computex-2026.peteraim.com/innovex.html</loc>
+  </url>
+  <url>
+    <loc>https://computex-2026.peteraim.com/medical-computex.html</loc>
+  </url>
+  <url>
+    <loc>https://computex-2026.peteraim.com/medical-innovex.html</loc>
+  </url>
+  <url>
+    <loc>https://computex-2026.peteraim.com/news.html</loc>
+  </url>
+  <url>
+    <loc>https://computex-2026.peteraim.com/routes.html</loc>
+  </url>
+</urlset>
