@@ -1,5 +1,5 @@
 /* =========================================================================
-   lazy-data2web · composite · app.js  (vanilla, no build, no chart lib)
+   composite · app.js  (vanilla, no build, no chart lib)
 
    A single long page assembled from an ordered list of typed section-blocks.
    The whole page is config-driven:
