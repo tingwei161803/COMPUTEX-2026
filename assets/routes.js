@@ -39,7 +39,6 @@ window.Routes = (function () {
     paintControls();
     render();
     wireDialog();
-    Core.onLang(function () { paintPresets(); paintControls(); render(); });
   }
 
   /* ---------- presets ---------- */
