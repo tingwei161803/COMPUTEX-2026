@@ -66,7 +66,6 @@ window.Directory = (function () {
     buildBar();
     apply();
     wireDialog();
-    Core.onLang(function () { buildBar(true); render(); });
   }
 
   function buildBar(keep) {

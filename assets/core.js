@@ -1,9 +1,10 @@
 /* =========================================================================
    core.js — shared chrome for every page EXCEPT the composite home.
-   Manages bilingual + theme state (same localStorage keys as app.js so the
-   preference carries across pages), exposes t()/escapeHtml(), wires the
-   appbar toggles, runs scroll-reveal, and fires a "langchange" event so each
-   page can repaint its data-driven content in the new language.
+   Manages theme state (same localStorage key as app.js so the preference
+   carries across pages), exposes t()/escapeHtml(), wires the appbar toggles
+   and runs scroll-reveal. Language is NOT state: each language has its own
+   URL, so a page paints once in the language it declares and never switches
+   in place.
 
    Static chrome (site-nav labels, hard-coded copy) does NOT go through JS:
    it uses paired .i18n-zh / .i18n-en spans toggled by html[lang] in CSS.
@@ -14,8 +15,15 @@ window.Core = (function () {
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
+  /* The URL decides the language: each language version is its own page and
+     says so in <html lang>. Never read it back from storage — someone opening
+     /en/ must get English even if they once picked 中文 here, and crawlers
+     have no storage at all. */
+  var pageLang = (document.documentElement.getAttribute("lang") || "en")
+    .toLowerCase().indexOf("zh") === 0 ? "zh" : "en";
+
   var state = {
-    lang: lsGet("lang") || "en",
+    lang: pageLang,
     theme: lsGet("theme") || "light"
   };
 
@@ -78,32 +86,14 @@ window.Core = (function () {
     if (icon) icon.textContent = state.theme === "dark" ? "light_mode" : "dark_mode";
     lsSet("theme", state.theme);
   }
-  function applyLang() {
-    document.documentElement.setAttribute("lang", state.lang);
-    var label = $("langLabel");
-    if (label) label.textContent = state.lang === "en" ? "EN" : "中";
-    lsSet("lang", state.lang);
-  }
-
-  var langCbs = [];
-  function onLang(cb) { langCbs.push(cb); }
-  function fireLang() {
-    langCbs.forEach(function (cb) { try { cb(state.lang); } catch (e) {} });
-    document.dispatchEvent(new CustomEvent("langchange", { detail: state.lang }));
-  }
-
   function wireChrome() {
     var th = $("themeToggle");
     if (th) th.addEventListener("click", function () {
       state.theme = state.theme === "dark" ? "light" : "dark";
       applyTheme();
     });
-    var lg = $("langToggle");
-    if (lg) lg.addEventListener("click", function () {
-      state.lang = state.lang === "en" ? "zh" : "en";
-      applyLang();
-      fireLang();
-    });
+    /* #langToggle needs no handler: it is a link to the other language's URL,
+       so switching language is a navigation, not a repaint. */
   }
 
   /* gentle fade-up as elements enter view; targets [data-item] within root */
@@ -133,13 +123,12 @@ window.Core = (function () {
 
   function init() {
     applyTheme();
-    applyLang();
     wireChrome();
   }
 
   return {
     state: state, t: t, escapeHtml: escapeHtml,
-    onLang: onLang, setupReveal: setupReveal, init: init,
+    setupReveal: setupReveal, init: init,
     lsGet: lsGet, lsSet: lsSet,
     venue: venue, floorplan: floorplan
   };

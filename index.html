@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" data-theme="light">
+<html lang="zh-Hant" data-theme="light">
 <head>
   <!-- ==== Google Analytics 4 (Measurement ID: G-QSHL8721S3) ==== -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QSHL8721S3"></script>
@@ -17,6 +17,9 @@
   <title>COMPUTEX 2026 · AI Together</title>
   <meta name="description" content="COMPUTEX 2026 — the world's largest AI exhibition, June 2–5 in Taipei. Explore the three core themes (AI &amp; Computing, Robotics &amp; Mobility, Next-Gen Tech), the show schedule, InnoVEX, NVIDIA GTC Taipei and visitor info. Bilingual 中文 / English." />
   <link rel="canonical" href="https://computex-2026.peteraim.com/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://computex-2026.peteraim.com/" />
+  <link rel="alternate" hreflang="en" href="https://computex-2026.peteraim.com/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://computex-2026.peteraim.com/" />
   <meta name="theme-color" content="#5B6CFF" />
 
   <!-- ==== Open Graph ==== -->
@@ -78,11 +81,12 @@
       </a>
 
       <div class="appbar__actions">
-        <button class="icon-btn" id="langToggle" type="button"
-                title="Language" aria-label="Toggle language / 切換語言">
+        <a class="icon-btn" id="langToggle" href="/en/"
+           hreflang="en" lang="en" rel="alternate"
+           title="English version" aria-label="View this page in English">
           <span class="material-symbols-rounded">translate</span>
-          <span class="icon-btn__txt" id="langLabel">中</span>
-        </button>
+          <span class="icon-btn__txt">EN</span>
+        </a>
 
         <button class="icon-btn" id="themeToggle" type="button"
                 title="Theme" aria-label="Toggle theme / 切換主題">
@@ -136,5 +140,6 @@
   <script src="assets/app.js"></script>
   <script src="assets/site-nav.js"></script>
   <script src="assets/ghstar.js"></script>
+<p class="lang-alt-link" style="text-align:center;padding:12px;"><a href="/en/" hreflang="en" rel="alternate" lang="en">English version</a></p>
 </body>
 </html>

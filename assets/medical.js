@@ -71,7 +71,6 @@ window.Medical = (function () {
     wireSearch();
     render();
     wireDialog();
-    Core.onLang(function () { paintCats(); render(); });
   }
 
   function paintCats() {
